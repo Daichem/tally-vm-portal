@@ -6,16 +6,17 @@ Complete these gates in order. Do not enter an application client secret at any 
 
 Keep an administrator worksheet with these values. They are identifiers, not passwords.
 
-| Placeholder           | Meaning                                            |
-| --------------------- | -------------------------------------------------- |
-| `<TENANT_ID>`         | Microsoft Entra Directory (tenant) ID              |
-| `<SUBSCRIPTION_ID>`   | Subscription containing the VM                     |
-| `<API_CLIENT_ID>`     | Application ID of `Daichem Tally VM API`           |
-| `<SPA_CLIENT_ID>`     | Application ID of `Daichem Tally VM Web`           |
-| `<FUNCTION_APP_NAME>` | Globally unique Azure Function App name            |
-| `<DEPLOY_CLIENT_ID>`  | Application ID of `Daichem Tally VM GitHub Deploy` |
-| `<RESOURCE_GROUP>`    | Resource group containing the target VM            |
-| `<VM_NAME>`           | Actual Azure VM resource name                      |
+| Placeholder                       | Meaning                                            |
+| --------------------------------- | -------------------------------------------------- |
+| `<TENANT_ID>`                     | Microsoft Entra Directory (tenant) ID              |
+| `<SUBSCRIPTION_ID>`               | Subscription containing the VM                     |
+| `<API_CLIENT_ID>`                 | Application ID of `Daichem Tally VM API`           |
+| `<SPA_CLIENT_ID>`                 | Application ID of `Daichem Tally VM Web`           |
+| `<FUNCTION_APP_NAME>`             | Globally unique Azure Function App name            |
+| `<FUNCTION_APP_DEFAULT_HOSTNAME>` | Exact Function App **Default domain** hostname     |
+| `<DEPLOY_CLIENT_ID>`              | Application ID of `Daichem Tally VM GitHub Deploy` |
+| `<RESOURCE_GROUP>`                | Resource group containing the target VM            |
+| `<VM_NAME>`                       | Actual Azure VM resource name                      |
 
 The initial browser URL is:
 
@@ -100,7 +101,8 @@ In the Azure portal:
 7. Keep the default storage account or create a dedicated standard general-purpose v2 account.
 8. Enable Application Insights unless organizational policy provides another logging destination.
 9. Create the Function App.
-10. Open **Identity → System assigned**, set Status to **On**, and save. Record the displayed principal/object ID.
+10. On **Overview**, record the exact **Default domain** hostname as `<FUNCTION_APP_DEFAULT_HOSTNAME>`. Flex Consumption can add a secure unique suffix, so do not infer this hostname from the Function App name.
+11. Open **Identity → System assigned**, set Status to **On**, and save. Record the displayed principal/object ID.
 
 No always-ready instances are required for this low-volume portal.
 
