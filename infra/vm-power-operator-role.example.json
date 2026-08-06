@@ -1,0 +1,15 @@
+{
+  "Name": "Daichem Tally VM Function Operator",
+  "IsCustom": true,
+  "Description": "Allows the Tally VM Function managed identity to read, start, and deallocate explicitly assigned virtual machines.",
+  "Actions": [
+    "Microsoft.Compute/virtualMachines/read",
+    "Microsoft.Compute/virtualMachines/instanceView/read",
+    "Microsoft.Compute/virtualMachines/start/action",
+    "Microsoft.Compute/virtualMachines/deallocate/action"
+  ],
+  "NotActions": [],
+  "DataActions": [],
+  "NotDataActions": [],
+  "AssignableScopes": ["/subscriptions/<SUBSCRIPTION_ID>"]
+}

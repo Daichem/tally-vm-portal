@@ -1,0 +1,6 @@
+{
+  "tenantId": "00000000-0000-0000-0000-000000000000",
+  "spaClientId": "00000000-0000-0000-0000-000000000000",
+  "apiBaseUrl": "https://example-function.azurewebsites.net/api/",
+  "apiScope": "api://00000000-0000-0000-0000-000000000000/Vm.Access"
+}

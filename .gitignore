@@ -1,0 +1,23 @@
+# Dependencies and build output
+node_modules/
+.pnpm-store/
+dist/
+.azure-package/
+coverage/
+*.tgz
+
+# Local configuration
+apps/web/public/config.json
+apps/api/local.settings.json
+.env
+.env.*
+!.env.example
+
+# Tooling and operating systems
+.DS_Store
+*.log
+.idea/
+.vscode/
+
+# Preserved local migration material; never publish legacy secrets or binaries.
+.legacy/

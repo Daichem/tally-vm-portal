@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light" />
+    <meta name="referrer" content="no-referrer" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self' https://login.microsoftonline.com https://*.azurewebsites.net; frame-src https://login.microsoftonline.com; form-action 'none'; base-uri 'self'; object-src 'none'"
+    />
+    <title>Daichem Tally VM</title>
+  </head>
+  <body>
+    <main class="shell">
+      <header class="masthead">
+        <a class="brand" href="./" aria-label="Daichem Tally VM home">
+          <span class="brand-mark" aria-hidden="true">D</span>
+          <span>
+            <strong>Daichem</strong>
+            <small>Tally VM Portal</small>
+          </span>
+        </a>
+        <div id="account-menu" class="account-menu" hidden>
+          <span id="account-name"></span>
+          <button id="sign-out" class="button button-quiet" type="button">Sign out</button>
+        </div>
+      </header>
+
+      <section id="sign-in-panel" class="hero">
+        <div class="eyebrow">Authorized access</div>
+        <h1>Start or deallocate the Tally virtual machine.</h1>
+        <p>
+          Sign in with your Daichem Microsoft 365 account. Only users assigned by an administrator
+          can view or change VM power state.
+        </p>
+        <button id="sign-in" class="button button-primary" type="button">
+          Sign in with Microsoft
+        </button>
+      </section>
+
+      <section id="dashboard" class="dashboard" hidden>
+        <div class="dashboard-heading">
+          <div>
+            <div class="eyebrow">Azure virtual machines</div>
+            <h1>Power control</h1>
+            <p>Changes are applied only after confirmation.</p>
+          </div>
+          <button id="refresh" class="button button-secondary" type="button">Refresh</button>
+        </div>
+
+        <div id="notice" class="notice" role="status" aria-live="polite" hidden></div>
+        <div id="vm-list" class="vm-grid" aria-live="polite"></div>
+      </section>
+
+      <section id="fatal-error" class="error-panel" role="alert" hidden>
+        <h1>Portal configuration error</h1>
+        <p id="fatal-error-message"></p>
+      </section>
+
+      <footer>
+        <span>Daichem internal operations</span>
+        <span>Authentication and actions are recorded by Microsoft Azure.</span>
+      </footer>
+    </main>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

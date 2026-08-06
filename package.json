@@ -1,0 +1,21 @@
+{
+  "name": "@daichem/tally-vm-portal",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Secure web portal for managing approved Daichem Azure VM power states",
+  "packageManager": "pnpm@11.16.0",
+  "engines": {
+    "node": ">=22 <25",
+    "pnpm": ">=11 <12"
+  },
+  "scripts": {
+    "build": "pnpm -r build",
+    "check": "pnpm format:check && pnpm -r check && pnpm -r test && pnpm -r build",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "test": "pnpm -r test"
+  },
+  "devDependencies": {
+    "prettier": "^3.9.6"
+  }
+}

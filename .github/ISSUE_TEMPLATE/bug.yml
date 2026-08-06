@@ -1,0 +1,29 @@
+name: Bug report
+description: Report a problem with the Tally VM portal
+title: "[Bug]: "
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: Do not include tokens, client secrets, production VM names, or screenshots containing credentials.
+  - type: textarea
+    id: observed
+    attributes:
+      label: What happened?
+      description: Include the approximate time and the displayed error, with sensitive values removed.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+    validations:
+      required: true
+  - type: input
+    id: browser
+    attributes:
+      label: Browser and version
+  - type: textarea
+    id: checks
+    attributes:
+      label: Checks already performed
