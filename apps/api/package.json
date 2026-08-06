@@ -18,7 +18,7 @@
     "test": "node --test"
   },
   "dependencies": {
-    "@azure/arm-compute": "^25.0.0",
+    "@azure/arm-compute": "24.1.0",
     "@azure/functions": "^4.16.2",
     "@azure/identity": "^4.13.1",
     "jose": "^6.2.8"
