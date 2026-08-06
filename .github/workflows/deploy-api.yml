@@ -53,7 +53,14 @@ jobs:
         run: pnpm --filter @daichem/tally-vm-api test
 
       - name: Create isolated production package
-        run: pnpm --filter @daichem/tally-vm-api deploy --prod --legacy .azure-package
+        run: pnpm --config.node-linker=hoisted --filter @daichem/tally-vm-api deploy --prod --legacy .azure-package
+
+      - name: Verify production package
+        run: |
+          test ! -L .azure-package/node_modules/@azure/functions
+          test ! -L .azure-package/node_modules/@azure/identity
+          test ! -L .azure-package/node_modules/jose
+          node --input-type=module -e "await import('./.azure-package/src/functions/vms.js')"
 
       - name: Sign in to Azure with GitHub OIDC
         uses: azure/login@v2

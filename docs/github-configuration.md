@@ -13,11 +13,13 @@ Open **Settings → Secrets and variables → Actions → Variables** and create
 | `ENTRA_TENANT_ID`        | API/SPA tenant Directory ID                              |
 | `ENTRA_SPA_CLIENT_ID`    | `Daichem Tally VM Web` Application ID                    |
 | `ENTRA_API_SCOPE`        | `api://<API_CLIENT_ID>/Vm.Access`                        |
-| `API_BASE_URL`           | `https://<FUNCTION_APP_NAME>.azurewebsites.net/api/`     |
+| `API_BASE_URL`           | `https://<FUNCTION_APP_DEFAULT_HOSTNAME>/api/`           |
 | `AZURE_DEPLOY_CLIENT_ID` | `Daichem Tally VM GitHub Deploy` Application ID          |
 | `AZURE_TENANT_ID`        | Azure tenant Directory ID                                |
 | `AZURE_SUBSCRIPTION_ID`  | Azure subscription ID used by the deployment login       |
 | `AZURE_FUNCTIONAPP_NAME` | Function App resource name, without `.azurewebsites.net` |
+
+Copy `FUNCTION_APP_DEFAULT_HOSTNAME` from the Function App's **Overview → Default domain** value. Flex Consumption apps can use a secure unique hostname such as `name-random.eastus-01.azurewebsites.net`; do not construct this URL from the Function App name.
 
 The deployment workflows are intentionally skipped while required variables are absent.
 
