@@ -147,8 +147,6 @@ async function bootstrap(): Promise<void> {
       clearNotice();
       try {
         await auth.signIn();
-        showAuthenticated();
-        await refresh();
       } catch (error) {
         showNotice(error instanceof Error ? error.message : "Sign-in failed.", "error");
       }

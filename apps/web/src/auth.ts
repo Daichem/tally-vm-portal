@@ -38,13 +38,11 @@ export class EntraAuth {
     return this.#client.getActiveAccount();
   }
 
-  async signIn(): Promise<AccountInfo> {
-    const result = await this.#client.loginPopup({
+  async signIn(): Promise<void> {
+    await this.#client.loginRedirect({
       scopes: [this.#scope],
       prompt: "select_account",
     });
-    this.#client.setActiveAccount(result.account);
-    return result.account;
   }
 
   async accessToken(): Promise<string> {
@@ -63,15 +61,15 @@ export class EntraAuth {
       if (!(error instanceof InteractionRequiredAuthError)) {
         throw error;
       }
-      const result = await this.#client.acquireTokenPopup({
+      await this.#client.acquireTokenRedirect({
         account,
         scopes: [this.#scope],
       });
-      return result.accessToken;
+      throw new Error("The Microsoft authentication redirect did not start.");
     }
   }
 
   async signOut(): Promise<void> {
-    await this.#client.logoutPopup({ account: this.account ?? undefined });
+    await this.#client.logoutRedirect({ account: this.account ?? undefined });
   }
 }
