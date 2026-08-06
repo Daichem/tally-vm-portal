@@ -1,32 +1,59 @@
 import {
   AccountInfo,
+  BrowserAuthErrorCodes,
   InteractionRequiredAuthError,
   PublicClientApplication,
 } from "@azure/msal-browser";
 import type { RuntimeConfig } from "./config";
 
+export function isMissingTokenRequestError(error: unknown): boolean {
+  return (
+    typeof error === "object" &&
+    error !== null &&
+    "errorCode" in error &&
+    error.errorCode === BrowserAuthErrorCodes.noTokenRequestCacheError
+  );
+}
+
 export class EntraAuth {
   readonly #client: PublicClientApplication;
+  readonly #redirectUri: string;
   readonly #scope: string;
 
   constructor(config: RuntimeConfig) {
     this.#scope = config.apiScope;
+    this.#redirectUri = new URL(".", window.location.href).toString();
     this.#client = new PublicClientApplication({
       auth: {
         clientId: config.spaClientId,
         authority: `https://login.microsoftonline.com/${config.tenantId}`,
-        redirectUri: new URL(".", window.location.href).toString(),
-        postLogoutRedirectUri: new URL(".", window.location.href).toString(),
+        redirectUri: this.#redirectUri,
+        postLogoutRedirectUri: this.#redirectUri,
       },
       cache: {
-        cacheLocation: "sessionStorage",
+        cacheLocation: "localStorage",
       },
     });
   }
 
   async initialize(): Promise<void> {
     await this.#client.initialize();
-    const redirectResult = await this.#client.handleRedirectPromise();
+    let redirectResult;
+    try {
+      redirectResult = await this.#client.handleRedirectPromise();
+    } catch (error) {
+      if (!isMissingTokenRequestError(error)) {
+        throw error;
+      }
+
+      // A previous interrupted redirect can leave an authorization response in
+      // the URL without the PKCE request metadata needed to redeem it. Remove
+      // only this application's MSAL cache and callback URL so the user can
+      // start a clean sign-in instead of leaving the portal permanently stuck.
+      await this.#client.clearCache();
+      window.history.replaceState({}, document.title, this.#redirectUri);
+      redirectResult = null;
+    }
     if (redirectResult?.account) {
       this.#client.setActiveAccount(redirectResult.account);
     } else if (!this.#client.getActiveAccount()) {
