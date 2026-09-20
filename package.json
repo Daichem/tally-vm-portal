@@ -16,6 +16,6 @@
     "test": "pnpm -r test"
   },
   "devDependencies": {
-    "prettier": "^3.9.6"
+    "prettier": "^3.9.7"
   }
 }
